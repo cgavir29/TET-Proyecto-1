@@ -1,4 +1,4 @@
-# tee-proyecto-1
+# tet-proyecto-1
 
 ## Project setup
 ```
