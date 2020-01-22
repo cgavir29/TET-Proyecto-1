@@ -1,0 +1,28 @@
+{
+  "name": "tet-proyecto-1-back",
+  "version": "1.0.0",
+  "description": "Backend Proyecto 1 de Topicos Especiales en Telematica",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cgavir29/tet-proyecto-1-back.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cgavir29/tet-proyecto-1-back/issues"
+  },
+  "homepage": "https://github.com/cgavir29/tet-proyecto-1-back#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
