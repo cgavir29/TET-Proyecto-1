@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 
 const signin = require('./routes/signin')
 const users = require('./routes/api/users')
+// const data = require('./routes/api/data')
 
 const port = process.env.PORT || 3000
 const app = express()
@@ -26,9 +27,10 @@ mongoose
 	.catch(err => console.log(err))
 
 // Routes
-// app.use('/api/products', products)
-app.use('/api/users', users)
 app.use('/signin', signin)
+app.use('/api/users', users)
+// app.use('api/users/:id/data', data)
+
 
 app.listen(port, () => {
 	console.log(`Server running on port ${port}`)

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
+const DataSchema = require('./data') 
+
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -18,6 +20,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    data: [DataSchema]
 })
 
 // Hash password before saving
@@ -46,5 +49,4 @@ UserSchema.statics.findByCredentials = async (email, password) => {
 }
 
 const User = mongoose.model('User', UserSchema)
-
 module.exports = User

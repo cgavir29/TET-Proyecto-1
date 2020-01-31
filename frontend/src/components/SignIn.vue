@@ -8,3 +8,9 @@
     </b-field>
   </section>
 </template>
+
+<script>
+export default {
+  name: 'SignIn'
+}
+</script>

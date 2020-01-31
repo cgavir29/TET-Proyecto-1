@@ -3,7 +3,7 @@
     <section class="hero is-fullheight is-primary is-bold">
       <div class="hero-body">
         <div class="container">
-          <h1 class="title">Sign In</h1>
+          <h1 class="title">Sign in</h1>
           <SignIn />
         </div>
       </div>

@@ -12,12 +12,21 @@
     <template slot="end">
       <b-navbar-item tag="div">
         <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
+          <SignUp />
           <a class="button is-light">Log in</a>
         </div>
       </b-navbar-item>
     </template>
   </b-navbar>
 </template>
+
+<script>
+import SignUp from '@/components/SignUp.vue'
+
+export default {
+  name: 'Navbar',
+  components: {
+    SignUp
+  }
+}
+</script>
