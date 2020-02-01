@@ -8,7 +8,6 @@ router.post('/', async (req, res) => {
     try {
         const { email, password } = req.body
         const user = await User.findByCredentials(email, password)
-
         res.send(user)
     } catch (error) {
         res.status(400).send(error)
