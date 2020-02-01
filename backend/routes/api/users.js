@@ -72,4 +72,20 @@ router.delete('/:id', (req, res) => {
     })
 })
 
+
+// @route POST api/users/:id/data
+// @desc Add temp, humi and location data
+// @access Private
+router.post('/:id/data', (req, res) => {
+    User.findByIdAndUpdate(req.params.id, {
+        $push: { 'data': req.body }
+    }, { new: true }, (err, user) => {
+        if (err) return res.status(500).send(err)
+        if (!user) {
+            return res.status(404).send('User not found')
+        }
+        return res.status(200).send(user)
+    })
+})
+
 module.exports = router

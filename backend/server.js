@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 
 const signin = require('./routes/signin')
 const users = require('./routes/api/users')
-// const data = require('./routes/api/data')
 
 const port = process.env.PORT || 3000
 const app = express()
@@ -29,7 +28,6 @@ mongoose
 // Routes
 app.use('/signin', signin)
 app.use('/api/users', users)
-// app.use('api/users/:id/data', data)
 
 
 app.listen(port, () => {
