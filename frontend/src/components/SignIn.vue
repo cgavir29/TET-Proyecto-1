@@ -7,7 +7,7 @@
       <b-input v-model="user.password" type="password" placeholder="Password" password-reveal></b-input>
     </b-field>
     <b-field>
-      <b-button v-on:click="handleSubmit" class="is-light" type="submit">Log in</b-button>
+      <b-button v-on:click="handleSubmit" class="is-light" type="submit">Sign in</b-button>
     </b-field>
     </form>
 </template>

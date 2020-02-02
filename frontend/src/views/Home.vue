@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <section class="hero is-fullheight is-primary is-bold">
+    <section class="hero is-fullheight is-info is-bold">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">TET Proyecto 1</h1>
