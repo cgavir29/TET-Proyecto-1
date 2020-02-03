@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import axios from 'axios'
 
 export default {
@@ -26,6 +27,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions([]),
     handleSubmit () {
       console.log('hello')
       console.log(this.user)
