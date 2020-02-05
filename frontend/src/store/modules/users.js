@@ -13,12 +13,12 @@ const getters = {
   getUser: (state) => state.user
 }
 
-const actions = {
-// commit('setUser', ...)
-}
-
 const mutations = {
   setUser: (user) => (state.user = user)
+}
+
+const actions = {
+  setUser: (context) => (context.commit('setUser'))
 }
 
 export default {

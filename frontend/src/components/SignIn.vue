@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 import axios from 'axios'
 
 export default {
@@ -27,12 +27,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions([]),
+    ...mapMutations(['setUser']),
     handleSubmit () {
-      console.log('hello')
-      console.log(this.user)
       axios.post('/signin', this.user)
-        .then(user => (console.log(user)))
+        .then(user => {
+          console.log(user)
+          this.setUser(user)
+        })
         .catch(err => (console.log(err)))
     }
   }
