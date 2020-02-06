@@ -1,12 +1,7 @@
+import axios from 'axios'
+
 const state = {
-  user: {
-    data: {
-      temperature: 't',
-      humidity: 'h',
-      location: 't',
-      date: 'd'
-    }
-  }
+  user: {}
 }
 
 const getters = {
@@ -14,11 +9,19 @@ const getters = {
 }
 
 const mutations = {
-  setUser: (user) => (state.user = user)
+  setUser: (state, user) => (state.user = user),
+  clearUser: (state) => (state.user = null)
 }
 
 const actions = {
-  setUser: (context) => (context.commit('setUser'))
+  logUser ({ commit }, user) {
+    axios.post('/signin', user)
+      .then(res => commit('setUser', res.data))
+      .catch(err => console.log(err))
+  },
+  logoutUser ({ commit }) {
+    commit('clearUser')
+  }
 }
 
 export default {

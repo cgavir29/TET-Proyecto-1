@@ -12,9 +12,13 @@
     <template slot="end">
       <b-navbar-item tag="div">
         <div class="buttons">
+          <a class="button is-primary" @click="isComponentModalActive = true">Sign up</a>
+          <b-modal :active.sync="isComponentModalActive" has-modal-card trap-focus aria-role="dialog" aria-modal>
           <SignUp />
-          <a class="button is-light">Log in</a>
+  </b-modal>
+          <!-- <a class="button is-light">Log in</a> -->
         </div>
+
       </b-navbar-item>
     </template>
   </b-navbar>
@@ -27,6 +31,16 @@ export default {
   name: 'Navbar',
   components: {
     SignUp
+  },
+  data () {
+    return {
+      isComponentModalActive: false,
+      formProps: {
+        name: '',
+        email: 'pepito@gmail.com',
+        password: ''
+      }
+    }
   }
 }
 </script>

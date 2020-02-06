@@ -7,14 +7,14 @@
       <b-input v-model="user.password" type="password" placeholder="Password" password-reveal></b-input>
     </b-field>
     <b-field>
+      <!-- <b-button v-on:click="logUser(user)" class="is-light" type="submit">Sign in</b-button> -->
       <b-button v-on:click="handleSubmit" class="is-light" type="submit">Sign in</b-button>
     </b-field>
     </form>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-import axios from 'axios'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'SignIn',
@@ -27,14 +27,10 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setUser']),
+    ...mapActions(['logUser']),
     handleSubmit () {
-      axios.post('/signin', this.user)
-        .then(user => {
-          console.log(user)
-          this.setUser(user)
-        })
-        .catch(err => (console.log(err)))
+      this.logUser(this.user)
+      // If erros show warning... later
     }
   }
 }
