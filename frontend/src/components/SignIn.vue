@@ -7,7 +7,6 @@
       <b-input v-model="user.password" type="password" placeholder="Password" password-reveal></b-input>
     </b-field>
     <b-field>
-      <!-- <b-button v-on:click="logUser(user)" class="is-light" type="submit">Sign in</b-button> -->
       <b-button v-on:click="handleSubmit" class="is-light" type="submit">Sign in</b-button>
     </b-field>
     </form>
@@ -30,6 +29,8 @@ export default {
     ...mapActions(['logUser']),
     handleSubmit () {
       this.logUser(this.user)
+      // If success -> Redirect
+      this.$router.push('/metrics')
       // If erros show warning... later
     }
   }

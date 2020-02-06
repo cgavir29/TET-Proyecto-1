@@ -12,19 +12,30 @@
     <template slot="end">
       <b-navbar-item tag="div">
         <div class="buttons">
-          <a class="button is-primary" @click="isComponentModalActive = true">Sign up</a>
-          <b-modal :active.sync="isComponentModalActive" has-modal-card trap-focus aria-role="dialog" aria-modal>
-          <SignUp />
-  </b-modal>
-          <!-- <a class="button is-light">Log in</a> -->
+          <div v-if="!this.isLoggedIn">
+            <a class="button is-primary" @click="isComponentModalActive = true">Sign up</a>
+            <b-modal
+              :active.sync="isComponentModalActive"
+              has-modal-card
+              trap-focus
+              aria-role="dialog"
+              aria-modal
+            >
+              <SignUp />
+            </b-modal>
+            <a class="button is-light">Log in</a>
+          </div>
+          <div v-else>
+            <a class="button is-light">Log out</a>
+          </div>
         </div>
-
       </b-navbar-item>
     </template>
   </b-navbar>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import SignUp from '@/components/SignUp.vue'
 
 export default {
@@ -34,13 +45,23 @@ export default {
   },
   data () {
     return {
-      isComponentModalActive: false,
-      formProps: {
-        name: '',
-        email: 'pepito@gmail.com',
-        password: ''
-      }
+      isLoggedIn: false,
+      isComponentModalActive: false
     }
+  },
+  computed: {
+    ...mapGetters(['getUser'])
+  },
+  watch: {
+    isLoggedIn: () => {
+      this.$forceUpdate()
+    }
+  },
+  created () {
+    console.log(this.getUser)
+    this.isLoggedIn = !!this.getUser
+    console.log(this.isLoggedIn)
   }
+
 }
 </script>

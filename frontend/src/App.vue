@@ -6,12 +6,18 @@
 </template>
 
 <script>
+// import { mapState } from 'vuex'
 import Navbar from '@/components/Navbar.vue'
 
 export default {
   name: 'App',
   components: {
     Navbar
+  },
+  data () {
+    return {
+      isLoggedIn: false
+    }
   }
 }
 </script>

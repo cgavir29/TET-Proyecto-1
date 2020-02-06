@@ -1,37 +1,47 @@
 <template>
   <div>
-    <nav class="level">
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Temperature</p>
-          <p class="title">{{ lastestData.temperature }}</p>
-        </div>
+    <div v-if="this.isLoggedIn">
+      <div v-if="this.lastestData">
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Temperature</p>
+              <p class="title">{{ lastestData.temperature }}</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Humidity</p>
+              <p class="title">{{ lastestData.humidity }}</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">GPS Location</p>
+              <p class="title">{{ lastestData.location }}</p>
+            </div>
+          </div>
+          <!-- <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Last Update</p>
+              <p class="title">{{ lastestData.date }}</p>
+            </div>
+          </div>-->
+          <!-- <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">Submitted</p>
+              <p class="title">25 times</p>
+            </div>
+          </div>-->
+        </nav>
       </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Humidity</p>
-          <p class="title">{{ lastestData.humidity }}</p>
-        </div>
+      <div v-else>
+        <h1 class="title">No Data Has Been Recorded</h1>
       </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">GPS Location</p>
-          <p class="title">{{ lastestData.location }}</p>
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Last Update</p>
-          <p class="title">{{ lastestData.date }}</p>
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Submitted</p>
-          <p class="title">25 times</p>
-        </div>
-      </div>
-    </nav>
+    </div>
+    <div v-else>
+      <h1 class="title">Please Sign In To Track Metrics</h1>
+    </div>
   </div>
 </template>
 
@@ -42,12 +52,17 @@ export default {
   name: 'MetricsData',
   data () {
     return {
+      isLoggedIn: false,
       lastestData: null
     }
   },
   computed: mapGetters(['getUser']),
-  created () {
-    this.lastestData = this.getUser.data[this.getUser.data.length - 1]
+  mounted () {
+    var loggedUser = this.getUser
+    if (loggedUser) {
+      this.isLoggedIn = true
+      this.lastestData = loggedUser.data[loggedUser.data.length - 1]
+    }
   }
 }
 </script>
