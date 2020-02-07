@@ -57,12 +57,24 @@ export default {
     }
   },
   computed: mapGetters(['getUser']),
-  mounted () {
-    var loggedUser = this.getUser
-    if (loggedUser) {
-      this.isLoggedIn = true
-      this.lastestData = loggedUser.data[loggedUser.data.length - 1]
+  watch: {
+    '$route': 'fetchUser'
+  },
+  methods: {
+    fetchUser () {
+      var loggedUser = this.getUser
+      if (loggedUser) {
+        this.isLoggedIn = true
+        this.lastestData = loggedUser.data[loggedUser.data.length - 1]
+      }
     }
+  },
+  mounted () {
+    this.fetchUser()
+  },
+  created () {
+    this.fetchUser()
   }
+
 }
 </script>

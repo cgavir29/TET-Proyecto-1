@@ -12,6 +12,7 @@
 
 <script>
 import MetricsData from '@/components/MetricsData.vue'
+
 export default {
   name: 'Metrics',
   components: {
