@@ -1,24 +1,24 @@
 <template>
   <div>
     <div v-if="this.isLoggedIn">
-      <div v-if="this.lastestData">
+      <div v-if="this.latestData">
         <nav class="level">
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Temperature</p>
-              <p class="title">{{ lastestData.temperature }}</p>
+              <p class="title" :key="isLoggedIn">{{ latestData.temperature }}</p>
             </div>
           </div>
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Humidity</p>
-              <p class="title">{{ lastestData.humidity }}</p>
+              <p class="title" :key="isLoggedIn">{{ latestData.humidity }}</p>
             </div>
           </div>
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">GPS Location</p>
-              <p class="title">{{ lastestData.location }}</p>
+              <p class="title" :key="isLoggedIn">{{ latestData.location }}</p>
             </div>
           </div>
           <!-- <div class="level-item has-text-centered">
@@ -53,10 +53,14 @@ export default {
   data () {
     return {
       isLoggedIn: false,
-      lastestData: null
+      latestData: null
     }
   },
   computed: mapGetters(['getUser']),
+  beforeEnter (to, from, next) {
+    this.fetchUser()
+    next()
+  },
   watch: {
     '$route': 'fetchUser'
   },
@@ -65,16 +69,12 @@ export default {
       var loggedUser = this.getUser
       if (loggedUser) {
         this.isLoggedIn = true
-        this.lastestData = loggedUser.data[loggedUser.data.length - 1]
+        this.latestData = loggedUser.data[loggedUser.data.length - 1]
       }
     }
   },
   mounted () {
     this.fetchUser()
-  },
-  created () {
-    this.fetchUser()
   }
-
 }
 </script>

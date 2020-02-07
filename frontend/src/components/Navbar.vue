@@ -23,7 +23,7 @@
             >
               <SignUp />
             </b-modal>
-            <a class="button is-light">Log in</a>
+            <!-- <a class="button is-light">Log in</a> -->
           </div>
           <div v-else>
             <a class="button is-light">Log out</a>
@@ -51,17 +51,6 @@ export default {
   },
   computed: {
     ...mapGetters(['getUser'])
-  },
-  watch: {
-    isLoggedIn: () => {
-      this.$forceUpdate()
-    }
-  },
-  created () {
-    console.log(this.getUser)
-    this.isLoggedIn = !!this.getUser
-    console.log(this.isLoggedIn)
   }
-
 }
 </script>

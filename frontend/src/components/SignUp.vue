@@ -22,7 +22,7 @@
         </b-field>
       </section>
       <footer class="modal-card-foot is-centered">
-        <button class="button is-primary" @click="handleSubmit">Register</button>
+        <button class="button is-primary" type="submit" @click="handleSubmit">Register</button>
         <button class="button" type="button" @click="$parent.close()">Close</button>
       </footer>
     </div>
