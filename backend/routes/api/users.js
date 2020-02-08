@@ -7,7 +7,7 @@ const User = require('../../models/user')
 
 // @route   POST api/users
 // @desc    Create a user
-// @access  Private
+// @access  Public
 router.post('/', (req, res) => {
     User.create({
         name: req.body.name,
@@ -41,24 +41,6 @@ router.get('/:id', (req, res) => {
     })
 })
 
-// @route   PUT api/users
-// @desc    Modify a user
-// @access  Private
-router.put('/:id', (req, res) => {
-    var modifiedUser = User(req.body)
-    modifiedUser._id = req.params.id
-    modifiedUser.password = bcrypt.hashSync(modifiedUser.password)
-
-    User.findByIdAndUpdate(req.params.id, modifiedUser, { new: true },
-        (err, user) => {
-            if (err) return res.status(500).send(err)
-            if (!user) {
-                return res.status(404).send('User not found')
-            }
-            return res.status(200).send(user)
-        })
-})
-
 // @route   DELETE api/users
 // @desc    Delete a user
 // @access  Private
@@ -71,7 +53,6 @@ router.delete('/:id', (req, res) => {
         return res.status(200).send('User successfully deleted')
     })
 })
-
 
 // @route POST api/users/:id/data
 // @desc Add temp, humi and location data
