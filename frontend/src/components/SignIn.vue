@@ -30,7 +30,7 @@ export default {
     handleSubmit () {
       this.logUser(this.user)
       // If success -> Redirect
-      // this.$router.push('/metrics')
+      this.$router.push('/metrics')
       // If erros show warning... later
     }
   }

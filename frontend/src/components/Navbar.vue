@@ -23,10 +23,11 @@
             >
               <SignUp />
             </b-modal>
-            <!-- <a class="button is-light">Log in</a> -->
           </div>
           <div v-else>
-            <a class="button is-light">Log out</a>
+            <router-link :to="{ path: '/' }">
+             <a class="button is-light" @click="logoutUser">Log out</a>
+            </router-link>
           </div>
         </div>
       </b-navbar-item>
@@ -35,7 +36,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import SignUp from '@/components/SignUp.vue'
 
 export default {
@@ -50,6 +51,9 @@ export default {
   },
   computed: {
     ...mapGetters(['getUser'])
+  },
+  methods: {
+    ...mapActions(['logoutUser'])
   }
 }
 </script>

@@ -47,7 +47,6 @@ export default {
     handleSubmit () {
       axios.post('/api/users', this.user)
         .then(res => {
-          console.log(res)
           this.$parent.close()
         })
         .then(err => console.log(err))
