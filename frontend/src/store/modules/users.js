@@ -5,7 +5,12 @@ const state = {
 }
 
 const getters = {
-  getUser: (state) => state.user
+  getUser: (state) => state.user,
+  getUserLatestData: (state) => {
+    if (state.user) {
+      return state.user.data[state.user.data.length - 1]
+    }
+  }
 }
 
 const mutations = {

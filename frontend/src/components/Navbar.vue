@@ -12,7 +12,7 @@
     <template slot="end">
       <b-navbar-item tag="div">
         <div class="buttons">
-          <div v-if="!this.isLoggedIn">
+          <div v-if="!this.getUser">
             <a class="button is-primary" @click="isComponentModalActive = true">Sign up</a>
             <b-modal
               :active.sync="isComponentModalActive"
@@ -45,7 +45,6 @@ export default {
   },
   data () {
     return {
-      isLoggedIn: false,
       isComponentModalActive: false
     }
   },

@@ -1,24 +1,24 @@
 <template>
   <div>
-    <div v-if="this.isLoggedIn">
-      <div v-if="this.latestData">
+    <div v-if="this.getUser">
+      <div v-if="this.getUserLatestData">
         <nav class="level">
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Temperature</p>
-              <p class="title" :key="isLoggedIn">{{ latestData.temperature }}</p>
+              <p class="title">{{ getUserLatestData.temperature }}</p>
             </div>
           </div>
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Humidity</p>
-              <p class="title" :key="isLoggedIn">{{ latestData.humidity }}</p>
+              <p class="title">{{ getUserLatestData.humidity }}</p>
             </div>
           </div>
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">GPS Location</p>
-              <p class="title" :key="isLoggedIn">{{ latestData.location }}</p>
+              <p class="title">{{ getUserLatestData.location }}</p>
             </div>
           </div>
           <!-- <div class="level-item has-text-centered">
@@ -50,31 +50,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'MetricsData',
-  data () {
-    return {
-      isLoggedIn: false,
-      latestData: null
-    }
-  },
-  computed: mapGetters(['getUser']),
-  beforeEnter (to, from, next) {
-    this.fetchUser()
-    next()
-  },
-  watch: {
-    '$route': 'fetchUser'
-  },
-  methods: {
-    fetchUser () {
-      var loggedUser = this.getUser
-      if (loggedUser) {
-        this.isLoggedIn = true
-        this.latestData = loggedUser.data[loggedUser.data.length - 1]
-      }
-    }
-  },
-  mounted () {
-    this.fetchUser()
-  }
+  computed: mapGetters(['getUser', 'getUserLatestData'])
 }
 </script>
