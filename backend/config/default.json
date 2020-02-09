@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://cgavir29:sbmFGM49@data-3vhl7.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "tet-proyecto-1"
+}

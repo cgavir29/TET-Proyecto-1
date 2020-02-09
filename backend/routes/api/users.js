@@ -1,5 +1,6 @@
 const express = require('express')
-const bcrypt = require('bcryptjs')
+const verifyToken = require('../../middleware/auth')
+
 const router = express.Router()
 
 // User Model
@@ -19,52 +20,33 @@ router.post('/', (req, res) => {
 })
 
 // @route   GET api/users
-// @desc    Get all users
-// @access  Private
-router.get('/', (req, res) => {
-    User.find((err, user) => {
-        if (err) return res.status(500).send(err)
-        return res.status(200).send(user)
-    })
-})
-
-// @route   GET api/users
 // @desc    Get a user
 // @access  Private
-router.get('/:id', (req, res) => {
-    User.findById(req.params.id, (err, user) => {
-        if (err) return res.status(500).send(err)
-        if (!user) {
-            return res.status(404).send('User not found')
-        }
-        return res.status(200).send(user)
-    })
+router.get('/', verifyToken, (req, res) => {
+    User.findById(req.user.id)
+        .select('-password')
+        .then(user => res.json(user))
+        .catch(err => send.status(500).send(err))
 })
 
 // @route   DELETE api/users
 // @desc    Delete a user
 // @access  Private
-router.delete('/:id', (req, res) => {
-    User.findByIdAndDelete(req.params.id, (err, user) => {
+router.delete('/', verifyToken, (req, res) => {
+    User.findByIdAndDelete(req.user.id, (err, user) => {
         if (err) return res.status(500).send(err)
-        if (!user) {
-            return res.status(404).send('User not found')
-        }
         return res.status(200).send('User successfully deleted')
     })
 })
 
-// @route POST api/users/:id/data
+// @route POST api/users/data
 // @desc Add temp, humi and location data
 // @access Private
-router.post('/:id/data', (req, res) => {
-    User.findByIdAndUpdate(req.params.id, {
+router.post('/data', verifyToken, (req, res) => {
+    User.findByIdAndUpdate(req.user.id, {
         $push: { 'data': req.body }
     }, { new: true }, (err, user) => {
         if (err) return res.status(500).send(err)
-        if (!user) {
-            return res.status(404).send('User not found')
-        }
         return res.status(200).send(user)
     })
 })

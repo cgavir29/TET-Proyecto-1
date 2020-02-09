@@ -1,20 +1,20 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const config = require('config')
 
-const signin = require('./routes/signin')
+const auth = require('./routes/auth')
 const users = require('./routes/api/users')
 
 const port = process.env.PORT || 3000
 const app = express()
 
 // Middleware
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(cors())
 
 // Database Connection
-const db = "mongodb+srv://cgavir29:sbmFGM49@data-3vhl7.mongodb.net/test?retryWrites=true&w=majority"
+const db = config.get('mongoURI')
 mongoose
 	.connect(db, {
 		useNewUrlParser: true,
@@ -26,7 +26,7 @@ mongoose
 	.catch(err => console.log(err))
 
 // Routes
-app.use('/signin', signin)
+app.use('/signin', auth)
 app.use('/api/users', users)
 
 app.listen(port, () => {
