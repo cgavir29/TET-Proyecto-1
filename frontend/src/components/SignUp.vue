@@ -45,11 +45,23 @@ export default {
   },
   methods: {
     handleSubmit () {
+      if (this.user.name === '' || this.user.email === '' || this.user.password === '') return
       axios.post('/api/users', this.user)
         .then(res => {
           this.$parent.close()
         })
-        .then(err => console.log(err))
+        .catch(() => {
+          this.$buefy.dialog.alert({
+            title: 'Error',
+            message: 'Email already used',
+            type: 'is-danger',
+            hasIcon: true,
+            icon: 'times-circle',
+            iconPack: 'fa',
+            ariaRole: 'alertdialog',
+            ariaModal: true
+          })
+        })
     }
   }
 }

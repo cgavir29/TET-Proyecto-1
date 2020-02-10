@@ -1,18 +1,19 @@
 <template>
-    <form @submit.prevent>
+  <form @submit.prevent>
     <b-field>
-      <b-input v-model="user.email" type="email" placeholder="Email"></b-input>
+      <b-input v-model="user.email" type="text" placeholder="Email" required></b-input>
     </b-field>
     <b-field>
-      <b-input v-model="user.password" type="password" placeholder="Password" password-reveal></b-input>
+      <b-input v-model="user.password" type="password" placeholder="Password" required password-reveal></b-input>
     </b-field>
     <b-field>
       <b-button v-on:click="handleSubmit" class="is-light" type="submit">Sign in</b-button>
     </b-field>
-    </form>
+  </form>
 </template>
 
 <script>
+import axios from 'axios'
 import { mapActions } from 'vuex'
 
 export default {
@@ -28,10 +29,25 @@ export default {
   methods: {
     ...mapActions(['logUser']),
     handleSubmit () {
-      this.logUser(this.user)
-      // If success -> Redirect
-      this.$router.push('/metrics')
-      // If erros show warning... later
+      if (this.user.email === '' || this.user.password === '') return
+
+      axios.post('/signin', this.user)
+        .then(res => {
+          this.logUser(res.data)
+          this.$router.push('/metrics')
+        })
+        .catch(error => {
+          this.$buefy.dialog.alert({
+            title: 'Error',
+            message: error.response.data.error,
+            type: 'is-danger',
+            hasIcon: true,
+            icon: 'times-circle',
+            iconPack: 'fa',
+            ariaRole: 'alertdialog',
+            ariaModal: true
+          })
+        })
     }
   }
 }

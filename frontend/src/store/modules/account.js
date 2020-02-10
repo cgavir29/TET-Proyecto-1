@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 const state = {
   token: null,
   user: null
@@ -22,13 +20,9 @@ const mutations = {
 }
 
 const actions = {
-  logUser ({ commit }, user) {
-    axios.post('/signin', user)
-      .then(res => {
-        commit('setToken', res.data.token)
-        commit('setUser', res.data.user)
-      })
-      .catch(err => { console.log(err) })
+  logUser ({ commit }, { token, user }) {
+    commit('setToken', token)
+    commit('setUser', user)
   },
   logoutUser ({ commit }) {
     commit('clearToken')
