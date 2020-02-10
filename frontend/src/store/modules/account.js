@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const state = {
+  token: null,
   user: null
 }
 
@@ -14,6 +15,8 @@ const getters = {
 }
 
 const mutations = {
+  setToken: (state, token) => (state.token = token),
+  clearToken: (state) => (state.token = null),
   setUser: (state, user) => (state.user = user),
   clearUser: (state) => (state.user = null)
 }
@@ -21,10 +24,14 @@ const mutations = {
 const actions = {
   logUser ({ commit }, user) {
     axios.post('/signin', user)
-      .then(res => commit('setUser', res.data))
-      .catch(err => console.log(err))
+      .then(res => {
+        commit('setToken', res.data.token)
+        commit('setUser', res.data.user)
+      })
+      .catch(err => { console.log(err) })
   },
   logoutUser ({ commit }) {
+    commit('clearToken')
     commit('clearUser')
   }
 }

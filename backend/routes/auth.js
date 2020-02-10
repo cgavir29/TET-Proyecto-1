@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
         const user = await User.findByCredentials(email, password)
         const token = jwt.sign({ id: user._id.toString() }, config.get('jwtSecret'))
 
-        res.status(200).json({ token: token })
+        res.status(200).json({ token: token, user: user.toJSON() })
     } catch (error) {
         res.status(400).send(error)
     }
